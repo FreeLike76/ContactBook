@@ -1,4 +1,4 @@
-package com.company;
+package com.contactbook.model;
 
 public class Contact {
     private String lastName;
@@ -8,6 +8,10 @@ public class Contact {
     private int addressNumber;
     private String phoneNumber;
     private String info;
+
+    Contact() {
+        // Empty constructor
+    }
 
     Contact(String lastName, String firstName, String patronymic,
             String addressName, int addressNumber, String phoneNumber, String info) {
@@ -87,5 +91,10 @@ public class Contact {
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", info='" + info + '\'' +
                 '}';
+    }
+
+    public Boolean isMobilePhone()
+    {
+        return this.phoneNumber.contains("+380");
     }
 }

@@ -1,9 +1,9 @@
-package com.company;
+package com.contactbook.util;
 
 
 import java.util.Random;
 
-public class ContactGenerator {
+public class Generator {
     private static final String[] lastName = {
             "Geleshko", "Orlovsky", "Melnyk",
             "Migirov", "Samoliuk", "Zlaman",
@@ -29,7 +29,11 @@ public class ContactGenerator {
     private static final String[] info = {
             "Teacher", "Friend", "Neighbour",
             "Brother", "Sister", "Mom",
-            "Dad", "Doctor", "Сolleague", ""};
+            "Dad", "Doctor", "Colleague", ""};
+
+    public static String generateLastName() {
+        return lastName[new Random().nextInt(lastName.length)];
+    }
 
     public static String generateFirstName() {
         return firstName[new Random().nextInt(firstName.length)];
@@ -40,7 +44,7 @@ public class ContactGenerator {
     }
 
     public static String generateAddressName() {
-        return city[new Random().nextInt(city.length)] +", "+ street[new Random().nextInt(street.length)];
+        return city[new Random().nextInt(city.length)] + ", " + street[new Random().nextInt(street.length)];
     }
 
     public static int generateAddressNumber() {
@@ -48,12 +52,15 @@ public class ContactGenerator {
     }
 
     public static String generatePhoneNumber() {
-        StringBuilder number = new StringBuilder(13);
-        number.append("+380");
-
         Random r = new Random();
+        StringBuilder number = new StringBuilder();
 
-        for (int i = 0; i < 9; i++) {
+        if (r.nextBoolean()) {
+            number.append("+380");
+            number.append(r.nextInt(10));
+        }
+
+        for (int i = 0; i < 8; i++) {
             number.append(r.nextInt(10));
         }
         return number.toString();
