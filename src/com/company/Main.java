@@ -7,25 +7,25 @@ public class Main {
 
     public static void main(String[] args) {
         ArrayList<Contact> ContactBook = new ArrayList<>(Arrays.asList(
-                new Contact("Geleshko", "Dmytro", "Romanovych",
+                new Contact("", "Dmytro", "",
                         "Kiev, Vyborzka", 3, "+380612357608", "Author"),
-                new Contact("Mamontov", "Vadym", "Sergiyovych",
+                new Contact("", "Vadym", "",
                         "Rivne, Lypneva", 12, "+380671712309", "Student"),
-                new Contact("Melnyk", "Vasyl", "Stepanovych",
+                new Contact("", "Vasyl", "",
                         "Rivne, Naberegna", 2, "", "Friend"),
-                new Contact("Migirov", "Ivan", "Dmytrovych",
+                new Contact("", "Ivan", "",
                         "Lviv, Pivnichna", 8, "+380681757608", "Friend"),
-                new Contact("Samoliuk", "Michael", "Romanovych",
+                new Contact("", "Michael", "Romanovych",
                         "Rivne, Central", 41, "+380671757606", "Teacher"),
-                new Contact("Melnyk", "Stepan", "Vadymovych",
+                new Contact("Melnyk", "Stepan", "",
                         "Kiev, Orlova", 2, "+380444457605", "Student"),
-                new Contact("Zlaman", "Maxim", "Ivanovych",
+                new Contact("", "Maxim", "",
                         "Odesa, Zahidna", 5, "+380612227603", "Student"),
-                new Contact("Kaida", "Ann", "Stepanovych",
+                new Contact("Kaida", "Ann", "",
                         "Kiev, Vyborzka", 3, "", "Doctor"),
-                new Contact("Gulchak", "Sophia", "Romanovych",
+                new Contact("", "Sophia", "",
                         "Rivne, Central", 8, "+380671733308", "Student"),
-                new Contact("Orlovsky", "Roman", "Ivanovych",
+                new Contact("", "Roman", "",
                         "Kiev, Malunova", 44, "+380688997609", "Doctor")));
 
         System.out.println("Contacts by char:");
