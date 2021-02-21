@@ -11,23 +11,11 @@ public class ContactModel {
         // Empty constructor
     }
 
-    public ContactModel(int size) {
-        contacts = new Contact[size];
-        for (int i = 0; i < contacts.length; i++) {
-            contacts[i] = new Contact(
-                    Generator.generateLastName(),
-                    Generator.generateFirstName(),
-                    Generator.generatePatronymic(),
-                    Generator.generateAddressName(),
-                    Generator.generateAddressNumber(),
-                    Generator.generatePhoneNumber(),
-                    Generator.generateInfo());
-        }
-
+    public ContactModel(Contact[] contacts) {
+        this.contacts = contacts;
     }
 
-    public Contact[] getContacts()
-    {
+    public Contact[] getContacts() {
         return this.contacts;
     }
 
@@ -38,7 +26,6 @@ public class ContactModel {
     public Contact[] getContactByChar(char ch) {
         int returnCounter = 0;
         Contact[] result;
-
         for (Contact con : this.contacts) {
             if (con.getFirstName().charAt(0) == ch) {
                 ++returnCounter;
@@ -64,7 +51,7 @@ public class ContactModel {
         Contact[] result;
 
         for (Contact con : this.contacts) {
-            if(con.isMobilePhone()) {
+            if (con.isMobilePhone()) {
                 ++returnCounter;
             }
         }
@@ -73,7 +60,7 @@ public class ContactModel {
             returnCounter = 0;
 
             for (Contact con : this.contacts) {
-                if(con.isMobilePhone()) {
+                if (con.isMobilePhone()) {
                     result[returnCounter++] = con;
                 }
             }

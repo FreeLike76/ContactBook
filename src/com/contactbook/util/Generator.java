@@ -1,5 +1,6 @@
 package com.contactbook.util;
 
+import com.contactbook.model.Contact;
 
 import java.util.Random;
 
@@ -67,6 +68,21 @@ public class Generator {
     }
 
     public static String generateInfo() {
-        return info[(int) (Math.random() * info.length)];
+        return info[new Random().nextInt(info.length)];
+    }
+
+    public static Contact[] generateBookOf(int size) {
+        Contact[] contacts = new Contact[size];
+        for (int i = 0; i < contacts.length; i++) {
+            contacts[i] = new Contact(
+                    generateLastName(),
+                    generateFirstName(),
+                    generatePatronymic(),
+                    generateAddressName(),
+                    generateAddressNumber(),
+                    generatePhoneNumber(),
+                    generateInfo());
+        }
+        return contacts;
     }
 }

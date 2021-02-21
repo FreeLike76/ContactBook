@@ -9,12 +9,17 @@ public class Contact {
     private String phoneNumber;
     private String info;
 
-    Contact() {
+    public Contact() {
         // Empty constructor
     }
 
-    Contact(String lastName, String firstName, String patronymic,
-            String addressName, int addressNumber, String phoneNumber, String info) {
+    public Contact(String lastName,
+                   String firstName,
+                   String patronymic,
+                   String addressName,
+                   int addressNumber,
+                   String phoneNumber,
+                   String info) {
         this.lastName = lastName;
         this.firstName = firstName;
         this.patronymic = patronymic;
@@ -80,6 +85,10 @@ public class Contact {
         this.info = info;
     }
 
+    public Boolean isMobilePhone() {
+        return this.phoneNumber.contains("+380");
+    }
+
     @Override
     public String toString() {
         return "Contact{" +
@@ -91,10 +100,5 @@ public class Contact {
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", info='" + info + '\'' +
                 '}';
-    }
-
-    public Boolean isMobilePhone()
-    {
-        return this.phoneNumber.contains("+380");
     }
 }
