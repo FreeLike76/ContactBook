@@ -17,32 +17,32 @@ public class ContactController {
 
         String[] command;
 
-        view.start();
+        view.START();
         while (true) {
-            command = view.nextCommand();
+            command = view.NEXT_COMMAND();
 
             switch (command[0]) {
                 case "exit":
                     System.exit(0);
                     break;
                 case "help":
-                    view.help();
+                    view.HELP();
                     break;
                 case "printall":
-                    view.contactTable(model.getContacts());
+                    view.CONTACT_TABLE(model.getContacts());
                     break;
                 case "printbychar":
                     if (command.length > 1 && command[1].length() == 1) {
-                        view.contactTable(model.getContactByChar(command[1].toUpperCase().charAt(0)));
+                        view.CONTACT_TABLE(model.getContactByChar(command[1].toUpperCase().charAt(0)));
                     } else {
-                        view.commandError();
+                        view.COMMAND_ERROR();
                     }
                     break;
                 case "printmobile":
-                    view.contactTable(model.getContactsWithMobPhone());
+                    view.CONTACT_TABLE(model.getContactsWithMobPhone());
                     break;
                 default:
-                    view.commandError();
+                    view.COMMAND_ERROR();
                     break;
             }
         }

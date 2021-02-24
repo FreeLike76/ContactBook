@@ -7,11 +7,11 @@ import java.util.Scanner;
 public class ContactView {
     public Scanner input = new Scanner(System.in);
 
-    public void start() {
+    public void START() {
         System.out.println("Type \"help\" for command list.");
     }
 
-    public void help() {
+    public void HELP() {
         System.out.println("exit\t\t\t- exit program.");
         System.out.println("help\t\t\t- show all commands.");
         System.out.println("printall\t\t- show all contacts.");
@@ -19,7 +19,7 @@ public class ContactView {
         System.out.println("printmobile\t\t- show contacts, who has mobile phone.");
     }
 
-    public void contactTable(Contact[] contacts) {
+    public void CONTACT_TABLE(Contact[] contacts) {
         if (contacts.length == 0) {
             System.out.println("No contact match the search!");
         } else {
@@ -54,11 +54,11 @@ public class ContactView {
         }
     }
 
-    public void commandError() {
+    public void COMMAND_ERROR() {
         System.out.println("Wrong Command!");
     }
 
-    public String[] nextCommand() {
+    public String[] NEXT_COMMAND() {
         return input.nextLine().split(" ");
     }
 }

@@ -5,6 +5,8 @@ import com.contactbook.model.Contact;
 import java.util.Random;
 
 public class Generator {
+    private static final Random seed = new Random();
+
     private static final String[] lastName = {
             "Geleshko", "Orlovsky", "Melnyk",
             "Migirov", "Samoliuk", "Zlaman",
@@ -33,36 +35,35 @@ public class Generator {
             "Dad", "Doctor", "Colleague", ""};
 
     public static String generateLastName() {
-        return lastName[new Random().nextInt(lastName.length)];
+        return lastName[seed.nextInt(lastName.length)];
     }
 
     public static String generateFirstName() {
-        return firstName[new Random().nextInt(firstName.length)];
+        return firstName[seed.nextInt(firstName.length)];
     }
 
     public static String generatePatronymic() {
-        return patronymic[new Random().nextInt(patronymic.length)];
+        return patronymic[seed.nextInt(patronymic.length)];
     }
 
     public static String generateAddressName() {
-        return city[new Random().nextInt(city.length)] + ", " + street[new Random().nextInt(street.length)];
+        return city[seed.nextInt(city.length)] + ", " + street[seed.nextInt(street.length)];
     }
 
     public static int generateAddressNumber() {
-        return new Random().nextInt(100);
+        return seed.nextInt(100);
     }
 
     public static String generatePhoneNumber() {
-        Random r = new Random();
         StringBuilder number = new StringBuilder();
 
-        if (r.nextBoolean()) {
+        if (seed.nextBoolean()) {
             number.append("+380");
-            number.append(r.nextInt(10));
+            number.append(seed.nextInt(10));
         }
 
         for (int i = 0; i < 8; i++) {
-            number.append(r.nextInt(10));
+            number.append(seed.nextInt(10));
         }
         return number.toString();
     }
