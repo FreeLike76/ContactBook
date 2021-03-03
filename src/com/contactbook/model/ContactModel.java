@@ -1,8 +1,8 @@
 package com.contactbook.model;
 
+
 import com.contactbook.util.Generator;
 
-import java.util.ArrayList;
 
 public class ContactModel {
     private Contact[] contacts;
@@ -11,12 +11,11 @@ public class ContactModel {
         // Empty constructor
     }
 
-    public ContactModel(Contact[] contacts) {
-        this.contacts = contacts;
+    public ContactModel(int size) {
+        this.contacts = Generator.generateBookOf(size);
     }
-
     public Contact[] getContacts() {
-        return this.contacts;
+        return this.contacts.clone();
     }
 
     public void setContacts(Contact[] contacts) {

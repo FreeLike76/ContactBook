@@ -1,11 +1,8 @@
 package com.contactbook.controller;
 
-import com.contactbook.util.Generator;
+
 import com.contactbook.view.ContactView;
 import com.contactbook.model.ContactModel;
-
-import java.awt.*;
-import java.util.Scanner;
 
 public class ContactController {
     private ContactModel model;
@@ -13,37 +10,35 @@ public class ContactController {
 
     public void exec() {
         view = new ContactView();
-        model = new ContactModel(Generator.generateBookOf(20));
+        model = new ContactModel(20);
 
         String[] command;
 
-        view.START();
+        view.start();
         while (true) {
-            command = view.NEXT_COMMAND();
+            command = view.getNextCommand();
 
             switch (command[0]) {
                 case "exit":
                     System.exit(0);
-                    break;
                 case "help":
-                    view.HELP();
+                    view.help();
                     break;
                 case "printall":
-                    view.CONTACT_TABLE(model.getContacts());
+                    view.contactTable(model.getContacts());
                     break;
                 case "printbychar":
                     if (command.length > 1 && command[1].length() == 1) {
-                        view.CONTACT_TABLE(model.getContactByChar(command[1].toUpperCase().charAt(0)));
+                        view.contactTable(model.getContactByChar(command[1].toUpperCase().charAt(0)));
                     } else {
-                        view.COMMAND_ERROR();
+                        view.commandError();
                     }
                     break;
                 case "printmobile":
-                    view.CONTACT_TABLE(model.getContactsWithMobPhone());
+                    view.contactTable(model.getContactsWithMobPhone());
                     break;
                 default:
-                    view.COMMAND_ERROR();
-                    break;
+                    view.commandError();
             }
         }
     }
