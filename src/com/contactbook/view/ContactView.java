@@ -2,13 +2,10 @@ package com.contactbook.view;
 
 import com.contactbook.model.Contact;
 
-import java.util.Scanner;
-
 public class ContactView {
-    public Scanner input = new Scanner(System.in);
 
-    public void start() {
-        System.out.println("Type \"help\" for command list.");
+    public void startHelp() {
+        System.out.println("\nType \"help\" for command list.");
     }
 
     public void help() {
@@ -54,11 +51,9 @@ public class ContactView {
         }
     }
 
-    public void commandError() {
-        System.out.println("Wrong Command!");
-    }
-
-    public String[] getNextCommand() {
-        return input.nextLine().split(" ");
+    public void printMessages(String... messages) {
+        for (String msg : messages) {
+            System.out.println(msg);
+        }
     }
 }

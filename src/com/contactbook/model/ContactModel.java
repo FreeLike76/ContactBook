@@ -8,12 +8,13 @@ public class ContactModel {
     private Contact[] contacts;
 
     public ContactModel() {
-        // Empty constructor
+        this.contacts = Generator.generateBookOf(20);
     }
 
     public ContactModel(int size) {
         this.contacts = Generator.generateBookOf(size);
     }
+
     public Contact[] getContacts() {
         return this.contacts.clone();
     }
