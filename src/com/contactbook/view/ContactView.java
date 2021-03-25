@@ -5,7 +5,7 @@ import com.contactbook.model.Contact;
 public class ContactView {
 
     public void startHelp() {
-        System.out.println("\nType \"help\" for command list.");
+        System.out.println("Type \"help\" for command list.");
     }
 
     public void help() {

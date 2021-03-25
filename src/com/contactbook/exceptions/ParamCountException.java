@@ -1,16 +1,14 @@
 package com.contactbook.exceptions;
 
 public class ParamCountException extends Exception {
-    private final int required;
-    private final int inputed;
+    private final String customDetails;
 
     public ParamCountException(String message, int required, int inputed) {
         super(message);
-        this.required = required;
-        this.inputed = inputed;
+        this.customDetails ="Command requires " + required + " parameters, found: " + inputed;
     }
 
     public String getCustomDetails() {
-        return "Command requires " + required + " parameters, found: " + inputed;
+        return this.customDetails;
     }
 }

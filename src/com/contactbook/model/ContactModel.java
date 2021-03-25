@@ -3,6 +3,8 @@ package com.contactbook.model;
 
 import com.contactbook.util.Generator;
 
+import java.util.Arrays;
+
 
 public class ContactModel {
     private Contact[] contacts;
@@ -16,7 +18,7 @@ public class ContactModel {
     }
 
     public Contact[] getContacts() {
-        return this.contacts.clone();
+        return Arrays.copyOf(this.contacts, this.contacts.length);
     }
 
     public void setContacts(Contact[] contacts) {

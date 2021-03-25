@@ -2,8 +2,10 @@ package com.contactbook.controller;
 
 
 import com.contactbook.exceptions.ParamCountException;
+import com.contactbook.exceptions.ParamTypeException;
 import com.contactbook.exceptions.WrongCommandException;
 import com.contactbook.util.UserInput;
+import com.contactbook.validators.ParamValidator;
 import com.contactbook.view.ContactView;
 import com.contactbook.model.ContactModel;
 
@@ -16,50 +18,33 @@ public class ContactController {
         view = new ContactView();
         model = new ContactModel();
         input = new UserInput();
+        String[] command;
 
         while (true) {
             view.startHelp();
-            input.getNextCommand();
+            command = input.getNextCommand();
             try {
-                switch (input.paramAt(0)) {
+                switch (command[0]) {
                     case "exit":
-                        if (input.paramCount() == 1) {
-                            System.exit(0);
-                        } else {
-                            throw new ParamCountException("Error! Wrong command parameters", 0, input.paramCount() - 1);
-                        }
-                        break;
+                        System.exit(0);
                     case "help":
-                        if (input.paramCount() == 1) {
-                            view.help();
-                        } else {
-                            throw new ParamCountException("Error! Wrong command parameters", 0, input.paramCount() - 1);
-                        }
+                        view.help();
                         break;
                     case "printall":
-                        if (input.paramCount() == 1) {
-                            view.contactTable(model.getContacts());
-                        } else {
-                            throw new ParamCountException("Error! Wrong command parameters", 0, input.paramCount() - 1);
-                        }
+                        view.contactTable(model.getContacts());
                         break;
                     case "printmobile":
-                        if (input.paramCount() == 1) {
-                            view.contactTable(model.getContactsWithMobPhone());
-                        } else {
-                            throw new ParamCountException("Error! Wrong command parameters", 0, input.paramCount() - 1);
-                        }
+                        view.contactTable(model.getContactsWithMobPhone());
                         break;
                     case "printbychar":
-                        if (input.paramCount() == 2 && input.paramIsCharAt(1)) {
-                            view.contactTable(model.getContactByChar(input.paramAt(1).toUpperCase().charAt(0)));
-                        } else {
-                            throw new ParamCountException("Error! Wrong command parameters", 1, input.paramCount() - 1);
-                        }
+                        ParamValidator.validatePrintByChar(command);
+                        view.contactTable(model.getContactByChar(command[1].toUpperCase().charAt(0)));
                         break;
                     default:
-                        throw new WrongCommandException("Error! Wrong command!", input.paramAt(0));
+                        throw new WrongCommandException("Error! Wrong command!", command[0]);
                 }
+            } catch (ParamTypeException e) {
+                view.printMessages(e.getMessage(), e.getCustomDetails());
             } catch (ParamCountException e) {
                 view.printMessages(e.getMessage(), e.getCustomDetails());
             } catch (WrongCommandException e) {
