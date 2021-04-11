@@ -18,7 +18,7 @@ public class ContactModel {
     }
 
     public Contact[] getContacts() {
-        return Arrays.copyOf(this.contacts, this.contacts.length);
+        return this.contacts.clone();
     }
 
     public void setContacts(Contact[] contacts) {

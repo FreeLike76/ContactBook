@@ -8,6 +8,7 @@ import com.contactbook.util.UserInput;
 import com.contactbook.validators.ParamValidator;
 import com.contactbook.view.ContactView;
 import com.contactbook.model.ContactModel;
+import com.contactbook.model.Contact;
 
 public class ContactController {
     private ContactModel model;
@@ -30,15 +31,14 @@ public class ContactController {
                     case "help":
                         view.help();
                         break;
-                    case "printall":
-                        view.contactTable(model.getContacts());
+                    case "print":
+                        view.contactTable(listContacts(command));
                         break;
-                    case "printmobile":
-                        view.contactTable(model.getContactsWithMobPhone());
+                    case "save":
+                        //savefile
                         break;
-                    case "printbychar":
-                        ParamValidator.validatePrintByChar(command);
-                        view.contactTable(model.getContactByChar(command[1].toUpperCase().charAt(0)));
+                    case "namesavefile":
+                        //set savefile name
                         break;
                     default:
                         throw new WrongCommandException("Error! Wrong command!", command[0]);
@@ -50,6 +50,19 @@ public class ContactController {
             } catch (WrongCommandException e) {
                 view.printMessages(e.getMessage(), e.getCustomDetails());
             }
+        }
+    }
+    private Contact[] listContacts(String[] command) throws ParamCountException, ParamTypeException{
+        ParamValidator.validateFilter(command);
+        switch(command[1]){
+            case "all":
+                return model.getContacts();
+            case "mobile":
+                return model.getContactsWithMobPhone();
+            case "bychar":
+                return model.getContactByChar(command[2].toUpperCase().charAt(0));
+            default:
+                return new Contact[0];
         }
     }
 }

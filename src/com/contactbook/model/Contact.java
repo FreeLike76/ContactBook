@@ -1,6 +1,6 @@
 package com.contactbook.model;
 
-public class Contact {
+public class Contact implements Cloneable{
     private String lastName;
     private String firstName;
     private String patronymic;
@@ -100,5 +100,10 @@ public class Contact {
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", info='" + info + '\'' +
                 '}';
+    }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException{
+        return super.clone();
     }
 }
