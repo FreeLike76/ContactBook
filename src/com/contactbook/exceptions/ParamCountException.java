@@ -5,7 +5,7 @@ public class ParamCountException extends Exception {
 
     public ParamCountException(String message, int required, int inputed) {
         super(message);
-        this.customDetails ="Command requires at least " + required + " parameters, found: " + inputed;
+        this.customDetails = "Command requires at least " + required + " parameters, found: " + inputed;
     }
 
     public String getCustomDetails() {

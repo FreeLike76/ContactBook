@@ -4,11 +4,15 @@ package com.contactbook.controller;
 import com.contactbook.exceptions.ParamCountException;
 import com.contactbook.exceptions.ParamTypeException;
 import com.contactbook.exceptions.WrongCommandException;
+import com.contactbook.util.FileController;
 import com.contactbook.util.UserInput;
 import com.contactbook.validators.ParamValidator;
 import com.contactbook.view.ContactView;
 import com.contactbook.model.ContactModel;
 import com.contactbook.model.Contact;
+
+import java.io.File;
+import java.io.IOException;
 
 public class ContactController {
     private ContactModel model;
@@ -35,10 +39,10 @@ public class ContactController {
                         view.contactTable(listContacts(command));
                         break;
                     case "save":
-                        //savefile
+                        view.printMessages(FileController.writeContacts(listContacts(command)));
                         break;
-                    case "namesavefile":
-                        //set savefile name
+                    case "testload":
+                        model.setContacts(FileController.readContacts(command[1]+" "+command[2]));
                         break;
                     default:
                         throw new WrongCommandException("Error! Wrong command!", command[0]);
@@ -50,11 +54,15 @@ public class ContactController {
             } catch (WrongCommandException e) {
                 view.printMessages(e.getMessage(), e.getCustomDetails());
             }
+            catch (IOException e) {
+                view.printMessages("Error! Reading/Writing failed!", e.getMessage());
+            }
         }
     }
-    private Contact[] listContacts(String[] command) throws ParamCountException, ParamTypeException{
+
+    private Contact[] listContacts(String[] command) throws ParamCountException, ParamTypeException {
         ParamValidator.validateFilter(command);
-        switch(command[1]){
+        switch (command[1]) {
             case "all":
                 return model.getContacts();
             case "mobile":

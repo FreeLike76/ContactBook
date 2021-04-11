@@ -1,6 +1,6 @@
 package com.contactbook.model;
 
-public class Contact implements Cloneable{
+public class Contact implements Cloneable {
     private String lastName;
     private String firstName;
     private String patronymic;
@@ -103,7 +103,7 @@ public class Contact implements Cloneable{
     }
 
     @Override
-    public Object clone() throws CloneNotSupportedException{
+    public Object clone() throws CloneNotSupportedException {
         return super.clone();
     }
 }

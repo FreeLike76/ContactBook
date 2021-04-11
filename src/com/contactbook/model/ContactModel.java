@@ -1,8 +1,10 @@
 package com.contactbook.model;
 
 
+import com.contactbook.util.FileController;
 import com.contactbook.util.Generator;
 
+import java.io.IOException;
 import java.util.Arrays;
 
 
@@ -15,6 +17,10 @@ public class ContactModel {
 
     public ContactModel(int size) {
         this.contacts = Generator.generateBookOf(size);
+    }
+
+    public ContactModel(String path) throws IOException {
+        this.contacts = FileController.readContacts(path);
     }
 
     public Contact[] getContacts() {
