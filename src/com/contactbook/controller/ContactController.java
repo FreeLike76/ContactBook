@@ -21,9 +21,15 @@ public class ContactController {
 
     public void exec() {
         view = new ContactView();
-        model = new ContactModel();
         input = new UserInput();
         String[] command;
+
+        try {
+            model = new ContactModel("saved/data.json");
+        } catch (IOException e) {
+            view.printMessages("Can't load \"data.json\"! Try loading manually.");
+            model = new ContactModel();
+        }
 
         while (true) {
             view.startHelp();
@@ -31,6 +37,9 @@ public class ContactController {
             try {
                 switch (command[0]) {
                     case "exit":
+                        if (command.length > 1 && command[1].equals("save")) {
+                            view.printMessages(FileController.writeContactsTo(model.getContacts(), "saved/data.json"));
+                        }
                         System.exit(0);
                     case "help":
                         view.help();
@@ -41,8 +50,8 @@ public class ContactController {
                     case "save":
                         view.printMessages(FileController.writeContacts(listContacts(command)));
                         break;
-                    case "testload":
-                        model.setContacts(FileController.readContacts(command[1]+" "+command[2]));
+                    case "loadfrom":
+                        model.setContacts(FileController.readContacts(command[1]));
                         break;
                     default:
                         throw new WrongCommandException("Error! Wrong command!", command[0]);
@@ -53,8 +62,7 @@ public class ContactController {
                 view.printMessages(e.getMessage(), e.getCustomDetails());
             } catch (WrongCommandException e) {
                 view.printMessages(e.getMessage(), e.getCustomDetails());
-            }
-            catch (IOException e) {
+            } catch (IOException e) {
                 view.printMessages("Error! Reading/Writing failed!", e.getMessage());
             }
         }

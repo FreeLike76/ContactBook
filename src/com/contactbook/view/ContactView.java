@@ -10,14 +10,15 @@ public class ContactView {
 
     public void help() {
         System.out.println("exit\t\t\t\t- exit program.");
+        System.out.println("exit save\t\t\t- save and exit program.");
         System.out.println("help\t\t\t\t- show all commands.");
         System.out.println("print all\t\t\t- show all contacts.");
         System.out.println("print bychar -a\t\t- show contacts, which name starts with -a.");
         System.out.println("print mobile\t\t- show contacts, who has mobile phone.");
         System.out.println("save all\t\t\t- save to file all contacts.");
         System.out.println("save bychar -a\t\t- save to file contacts, which name starts with -a.");
-        System.out.println("save mobile\t\t- save to file contacts, who has mobile phone.");
-
+        System.out.println("save mobile\t\t\t- save to file contacts, who has mobile phone.");
+        System.out.println("loadfrom -path\t\t- manually load data from file.");
     }
 
     public void contactTable(Contact[] contacts) {

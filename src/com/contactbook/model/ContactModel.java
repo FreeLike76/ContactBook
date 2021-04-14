@@ -12,7 +12,7 @@ public class ContactModel {
     private Contact[] contacts;
 
     public ContactModel() {
-        this.contacts = Generator.generateBookOf(20);
+        this.contacts = new Contact[0];
     }
 
     public ContactModel(int size) {
