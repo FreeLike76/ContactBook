@@ -52,6 +52,7 @@ public class ContactController {
                         break;
                     case "loadfrom":
                         model.setContacts(FileController.readContacts(command[1]));
+                        view.printMessages("Loaded successfully!");
                         break;
                     default:
                         throw new WrongCommandException("Error! Wrong command!", command[0]);
