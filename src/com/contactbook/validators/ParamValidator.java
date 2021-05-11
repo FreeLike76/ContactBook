@@ -21,4 +21,12 @@ public class ParamValidator {
             }
         }
     }
+    public static void validateLoad(String[] command) throws ParamCountException, ParamTypeException {
+        if (command.length < 2) {
+            throw new ParamCountException("Error! Wrong command parameters!", 1, 0);
+        }
+        if(!command[1].endsWith(".json")){
+            throw new ParamTypeException("Error! Wrong command parameters!", "path to .json file", command[1]);
+        }
+    }
 }

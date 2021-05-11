@@ -4,31 +4,31 @@ package com.contactbook.controller;
 import com.contactbook.exceptions.ParamCountException;
 import com.contactbook.exceptions.ParamTypeException;
 import com.contactbook.exceptions.WrongCommandException;
-import com.contactbook.util.FileController;
-import com.contactbook.util.UserInput;
 import com.contactbook.validators.ParamValidator;
 import com.contactbook.view.ContactView;
 import com.contactbook.model.ContactModel;
 import com.contactbook.model.Contact;
 
-import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class ContactController {
     private ContactModel model;
     private ContactView view;
-    private UserInput input;
+    private InputUtil input;
+    String[] command;
 
     public void exec() {
         view = new ContactView();
-        input = new UserInput();
-        String[] command;
-
+        input = new InputUtil();
         try {
-            model = new ContactModel("saved/data.json");
-        } catch (IOException e) {
-            view.printMessages("Can't load \"data.json\"! Try loading manually.");
             model = new ContactModel();
+        } catch (FileNotFoundException e) {
+            view.printMessages("Can't load \"data.json\"! File not found!", "Details: " + e.getMessage());
+            System.exit(-1);
+        } catch (IOException e) {
+            view.printMessages("Can't load \"data.json\"! Input Error!", "Details: " + e.getMessage());
+            System.exit(-1);
         }
 
         while (true) {
@@ -37,22 +37,22 @@ public class ContactController {
             try {
                 switch (command[0]) {
                     case "exit":
-                        if (command.length > 1 && command[1].equals("save")) {
-                            view.printMessages(FileController.writeContactsTo(model.getContacts(), "saved/data.json"));
+                        if (command.length < 2 || !command[1].equalsIgnoreCase("nosave")) {
+                            view.printMessages(model.saveContacts());
                         }
                         System.exit(0);
                     case "help":
                         view.help();
                         break;
                     case "print":
-                        view.contactTable(listContacts(command));
+                        view.contactTable(requestContactsByFilter());
                         break;
                     case "save":
-                        view.printMessages(FileController.writeContacts(listContacts(command)));
+                        view.printMessages(model.saveContactsTemp(requestContactsByFilter()));
                         break;
-                    case "loadfrom":
-                        model.setContacts(FileController.readContacts(command[1]));
-                        view.printMessages("Loaded successfully!");
+                    case "load":
+                        ParamValidator.validateLoad(command);
+                        view.printMessages(model.loadContacts(command[1]));
                         break;
                     default:
                         throw new WrongCommandException("Error! Wrong command!", command[0]);
@@ -63,13 +63,11 @@ public class ContactController {
                 view.printMessages(e.getMessage(), e.getCustomDetails());
             } catch (WrongCommandException e) {
                 view.printMessages(e.getMessage(), e.getCustomDetails());
-            } catch (IOException e) {
-                view.printMessages("Error! Reading/Writing failed!", e.getMessage());
             }
         }
     }
 
-    private Contact[] listContacts(String[] command) throws ParamCountException, ParamTypeException {
+    private Contact[] requestContactsByFilter() throws ParamCountException, ParamTypeException {
         ParamValidator.validateFilter(command);
         switch (command[1]) {
             case "all":

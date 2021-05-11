@@ -1,26 +1,19 @@
 package com.contactbook.model;
 
 
-import com.contactbook.util.FileController;
-import com.contactbook.util.Generator;
-
+import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Arrays;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 
 public class ContactModel {
     private Contact[] contacts;
+    private FileUtil Files;
 
-    public ContactModel() {
-        this.contacts = new Contact[0];
-    }
-
-    public ContactModel(int size) {
-        this.contacts = Generator.generateBookOf(size);
-    }
-
-    public ContactModel(String path) throws IOException {
-        this.contacts = FileController.readContacts(path);
+    public ContactModel() throws FileNotFoundException, IOException {
+        Files = new FileUtil();
+        this.contacts = Files.readContacts(Files.DATA_PATH);
     }
 
     public Contact[] getContacts() {
@@ -76,5 +69,37 @@ public class ContactModel {
             result = new Contact[0];
         }
         return result;
+    }
+
+    public String loadContacts(String path) {
+        try {
+            this.contacts = Files.readContacts(path);
+        } catch (FileNotFoundException e) {
+            return "Loading failed! File \"" + path + "\" not found!";
+        } catch (IOException e) {
+            return "Loading failed! Input error!";
+        }
+        return "Loading successful! Loaded " + this.contacts.length + " from \"" + path + "\".";
+    }
+
+    public String saveContacts() {
+        try {
+            Files.writeContactsTo(this.getContacts(), Files.DATA_PATH);
+        } catch (IOException e) {
+            return "Saving failed! Output exception.";
+        }
+        return "Saved " + this.contacts.length + " to \"" + Files.DATA_PATH + "\".";
+    }
+
+    public String saveContactsTemp(Contact[] contacts) {
+        String filename = "saved/"
+                + DateTimeFormatter.ofPattern("yyyy.MM.dd_HH.mm.ss").format(LocalDateTime.now())
+                + ".json";
+        try {
+            Files.writeContactsTo(contacts, filename);
+        } catch (IOException e) {
+            return "Saving failed!";
+        }
+        return "Saved " + contacts.length + " to \"" + filename + "\".";
     }
 }

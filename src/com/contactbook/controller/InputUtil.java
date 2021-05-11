@@ -1,11 +1,11 @@
-package com.contactbook.util;
+package com.contactbook.controller;
 
 import java.util.Scanner;
 
-public class UserInput {
+public class InputUtil {
     private Scanner input;
 
-    public UserInput() {
+    public InputUtil() {
         input = new Scanner(System.in);
     }
 

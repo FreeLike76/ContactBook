@@ -1,10 +1,10 @@
-package com.contactbook.util;
+package com.contactbook.model;
 
 import com.contactbook.model.Contact;
 
 import java.util.Random;
 
-public class Generator {
+public class TestGenerator {
     private static final Random seed = new Random();
 
     private static final String[] lastName = {
