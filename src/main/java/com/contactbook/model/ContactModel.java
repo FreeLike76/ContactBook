@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter;
 
 public class ContactModel {
     private Contact[] contacts;
-    private FileUtil Files;
+    private final FileUtil Files;
 
     public ContactModel() throws FileNotFoundException, IOException {
         Files = new FileUtil();
