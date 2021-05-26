@@ -1,0 +1,17 @@
+[DEBUG] 2021-05-26 16:37:58.193 com.contactbook.controller.ContactController - execution started
+[DEBUG] 2021-05-26 16:37:58.195 com.contactbook.controller.ContactController - creating ContactView
+[DEBUG] 2021-05-26 16:37:58.196 com.contactbook.controller.ContactController - creating InputUtil
+[DEBUG] 2021-05-26 16:37:58.199 com.contactbook.controller.ContactController - creating ContactModel
+[DEBUG] 2021-05-26 16:37:58.200 com.contactbook.model.ContactModel - creating FileUtil
+[DEBUG] 2021-05-26 16:37:58.225 com.contactbook.model.ContactModel - reading data
+[INFO ] 2021-05-26 16:38:00.274 com.contactbook.controller.ContactController - user input: help
+[INFO ] 2021-05-26 16:38:04.315 com.contactbook.controller.ContactController - user input: print bychar
+[WARN ] 2021-05-26 16:38:04.320 com.contactbook.controller.ContactController - command: wrong number of parameters
+[INFO ] 2021-05-26 16:38:08.920 com.contactbook.controller.ContactController - user input: save mobile
+[INFO ] 2021-05-26 16:38:08.920 com.contactbook.model.ContactModel - searching contacts with mobile phones
+[INFO ] 2021-05-26 16:38:08.921 com.contactbook.model.ContactModel - found: 47
+[INFO ] 2021-05-26 16:38:08.921 com.contactbook.model.ContactModel - temp saving contacts
+[INFO ] 2021-05-26 16:38:08.938 com.contactbook.model.ContactModel - temp saving successful
+[INFO ] 2021-05-26 16:38:10.164 com.contactbook.controller.ContactController - user input: exit
+[INFO ] 2021-05-26 16:38:10.164 com.contactbook.model.ContactModel - saving contacts
+[INFO ] 2021-05-26 16:38:10.170 com.contactbook.model.ContactModel - saving successful
